@@ -1,0 +1,36 @@
+1. linear cut generation (there are also equality constraitns involved, the cut at the moment consiers =< only )
+2. issues with the mip solver
+3. sometimes the tactic returns null (propagate-ineqs), or false
+4. if a formula is a conjunction and the tactic gives false then it is unsat, if tactic returns true then this constraint 
+is not needed
+5. check gurobi if unsat core generation is easier, think about cut, correctness
+6. trading with gurobi other params
+6. make program parametric
+7. investigate if removing a single sat instance is a good idea
+8. gurobi unsat core also shows which variable are in the core
+
+9 collectConjConstraint causing stack overflow
+10 check if the solution is a genuine integer solution
+
+
+QUANTIFIER ELIMINATION
+1. pre-processing creates some aux variables (remove_unconstr tactic solved it)
+2.Incorrect results (due to bv_extract translation): 
+    DeltaTR_CP_RP_DIFF_QESMT_benchmark_conjunction_11.smt (wrong formula emitted)
+    DeltaTR_RFRNC_OUT_QESMT_benchmark_conjunction_4.smt 
+4. obtaining benchmarks
+5. obtaining varset efficiently (http://stackoverflow.com/questions/14080398/z3py-how-to-get-the-list-of-variables-from-a-formula)
+6. boolean variable left for a while
+9. if equality do not generation all inequations,  do  not generate inequality if LHS or RHS expr is a variable
+10. if the result of delta computation is false, then use halt there and do something--early termination
+11. check unsat-core generation formula (is right but the assumption should be checked)
+
+Note careful on using lazy benders decomposition: gurobi may produce errors for < or >. The standarisation is removed in this version.
+
+
+ Z3 4.5.1 produced error in bvmul (the method, simplifyMultBy1BVExpr), earlier version had no problem 
+with the following error
+
+For unsigned var. the min value of a variable is zero, see if the delta bounds can be optimised
+
+It is not working for precise bits
